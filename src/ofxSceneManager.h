@@ -18,7 +18,10 @@ enum ofxSmTransition{
 
 class ofxSceneManager {
 public:
-    void run();
+	ofxSceneManager() {}
+	virtual ~ofxSceneManager() {}
+    
+	void run();
     
     void update();
     void draw();
@@ -34,10 +37,29 @@ public:
     void setTransitionFade();
     void setTransitionDissolve();
 
-    vector<ofPtr<ofxScene> > scenes;
+protected:
 
- private:
-    int _sceneIndex = 0;
+	void __addListener();
+	void _onStartFadingIn(bool &b);
+	void _onStartDrawing(bool &b);
+	void _onFinishedDrawing(bool &b);
+	void _onStartFadingOut(bool &b);
+	void _onFinishScene(bool &b);
+
+	void _keyPressed(ofKeyEventArgs & args);
+	void _keyReleased(ofKeyEventArgs & args);
+	void _mouseMoved(ofMouseEventArgs & args);
+	void _mouseDragged(ofMouseEventArgs & args);
+	void _mousePressed(ofMouseEventArgs & args);
+	void _mouseReleased(ofMouseEventArgs & args);
+	void _windowResized(ofResizeEventArgs & args);
+	void _dragEvent(ofDragInfo & dragInfo);
+	void _gotMessage(ofMessage & msg);
+
+protected:
+	vector<ofPtr<ofxScene> > scenes;
+    
+	int _sceneIndex = 0;
     int _nextSceneIndex;
     
     ofPtr<ofxScene> _currentScene;
@@ -48,22 +70,7 @@ public:
     
     ofxSmTransition transition = TRANSITION_FADE;
     bool _isInTransition = false;
-    
-    void _onStartFadingIn(bool &b);
-    void _onStartDrawing(bool &b);
-    void _onFinishedDrawing(bool &b);    
-    void _onStartFadingOut(bool &b);
-    void _onFinishScene(bool &b);
-    
-    void _keyPressed(ofKeyEventArgs & args);
-    void _keyReleased(ofKeyEventArgs & args);
-    void _mouseMoved(ofMouseEventArgs & args);
-    void _mouseDragged(ofMouseEventArgs & args);
-    void _mousePressed(ofMouseEventArgs & args);
-    void _mouseReleased(ofMouseEventArgs & args);
-    void _windowResized(ofResizeEventArgs & args);
-    void _dragEvent(ofDragInfo & dragInfo);
-    void _gotMessage(ofMessage & msg);
+
 };
 
 #endif /* defined(__KokiNomura__ofxSceneManager__) */

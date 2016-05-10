@@ -38,6 +38,7 @@ void ofxSceneManager::run() {
     ofAddListener(ofEvents().messageEvent, this, &ofxSceneManager::_gotMessage);
 }
 
+
 void ofxSceneManager::update() {
     if (transition == TRANSITION_DISSOLVE && _isInTransition) {
         _nextScene->updateScene();
